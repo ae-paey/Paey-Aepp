@@ -1,0 +1,35 @@
+contract Paey =
+
+  record payment =
+    { paeyAddress    : address,
+      companyAddress : address,
+      clientAddress  : address,
+      companyName    : string,
+      clientName     : string,
+      clientEmail    : string,
+      payingFor      : string,
+      amount         : int,
+      paeyCharge     : int }
+
+  record state =
+    { payments        : map(int, payment),
+      paymentsLength  : int }
+
+  entrypoint init() =
+    { payments = {},
+      paymentsLength = 0 }
+
+  entrypoint get_payments_length() : int =
+    state.paymentsLength
+
+  public stateful entrypoint make_payment(companyAddress' : address, clientAddress' : address, companyName' : string, clientName' : string, clientEmail' : string, payingFor' : string, amount' : int, paeyCharge' : int) =
+    let payment = { paeyAddress = ak_s3Qt2boW7eqP2o1maYoKXnbPovjjJGDcSYc4csyJqsZzVKc26, companyAddress = companyAddress', clientAddress = Call.caller, companyName = companyName', clientName = clientName', clientEmail = clientEmail', payingFor = payingFor', amount = amount', paeyCharge = paeyCharge'}
+    let index = get_payments_length() + 1
+    Chain.spend(payment.companyAddress, payment.amount)
+    Chain.spend(payment.paeyAddress, payment.paeyCharge)
+    put(state{ payments[index] = payment, paymentsLength = index })
+  
+  entrypoint get_payment(index : int) : payment =
+  	switch(Map.lookup(index, state.payments))
+	    None    => abort("There was no payment with this index registered.")
+	    Some(x) => x

@@ -1,0 +1,52 @@
+contract PaeyTrade =
+
+  record trade =
+    { paeyAddress    : address,
+      clientAddress  : address,
+      aeRate         : int,
+      usdRate        : int,
+      aeSent         : int,
+      aeReceived     : int,
+      ngnAmount      : int }
+
+  record state =
+    { trades           : map(int, trade),
+      tradesLength     : int,
+      sellTradesLength : int,
+      buyTradesLength  : int }
+
+  entrypoint init() =
+    { trades = {},
+      tradesLength = 0,
+      sellTradesLength = 0,
+      buyTradesLength = 0 }
+
+  entrypoint get_trades_length() : int =
+    state.tradesLength
+  
+  entrypoint get_sell_trades_length() : int =
+    state.sellTradesLength
+
+  entrypoint get_buy_trades_length() : int =
+    state.buyTradesLength
+
+  public stateful entrypoint sell_token(aeRate' : int, usdRate' : int, aeReceived' : int, ngnAmount' : int) =
+    let trade = { paeyAddress = ak_s3Qt2boW7eqP2o1maYoKXnbPovjjJGDcSYc4csyJqsZzVKc26, clientAddress = Call.caller, aeRate = aeRate', usdRate = usdRate', aeSent = 0, aeReceived = aeReceived', ngnAmount = ngnAmount'}
+    let index = get_trades_length() + 1
+    let sell = get_sell_trades_length() + 1
+    let buy = get_buy_trades_length()
+    Chain.spend(trade.paeyAddress, Call.value)
+    put(state{ trades[index] = trade, tradesLength = index, sellTradesLength = sell, buyTradesLength = buy })
+
+  public stateful entrypoint buy_token(clientAddress' : address, aeRate' : int, usdRate' : int, aeSent' : int, ngnAmount' : int) =
+    let trade = { paeyAddress = Call.caller, clientAddress = clientAddress', aeRate = aeRate', usdRate = usdRate', aeSent = aeSent', aeReceived = 0, ngnAmount = ngnAmount'}
+    let index = get_trades_length() + 1
+    let sell = get_sell_trades_length()
+    let buy = get_buy_trades_length() + 1
+    Chain.spend(trade.clientAddress, Call.value)
+    put(state{ trades[index] = trade, tradesLength = index, sellTradesLength = sell, buyTradesLength = buy })
+  
+  entrypoint get_trade(index : int) : trade =
+  	switch(Map.lookup(index, state.trades))
+	    None    => abort("There was no trade with this index registered.")
+	    Some(x) => x
