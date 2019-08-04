@@ -25,9 +25,11 @@ Here is a list of features that it has:
 
 ## Screenshot
 
-![Screenshot 1](https://i.ibb.co/P6TPYqG/1.png)
-![Screenshot 2](https://i.ibb.co/WHK6qP3/5.png)
-![Screenshot 4](https://i.ibb.co/cFNbrHt/4.png)
+<p align="center">
+  ![Screenshot 1](https://i.ibb.co/P6TPYqG/1.png)
+  ![Screenshot 2](https://i.ibb.co/WHK6qP3/5.png)
+  ![Screenshot 4](https://i.ibb.co/cFNbrHt/4.png)
+</p>
 
 ## LICENSE
 
