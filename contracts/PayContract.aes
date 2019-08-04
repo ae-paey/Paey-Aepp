@@ -1,35 +1,59 @@
-contract Paey =
+contract PaeyPay =
 
   record payment =
-    { paeyAddress    : address,
-      companyAddress : address,
+    { companyAddress : address,
       clientAddress  : address,
       companyName    : string,
       clientName     : string,
       clientEmail    : string,
       payingFor      : string,
-      amount         : int,
-      paeyCharge     : int }
+      amount         : int }
+
+  record charge =
+    {
+      paeyAddress   : address,
+      clientAddress : address,
+      companyName   : string,
+      clientName    : string,
+      amountPaid    : int,
+      paeyCharge   : int }
 
   record state =
     { payments        : map(int, payment),
-      paymentsLength  : int }
+      paymentsLength  : int,
+      charges         : map(int, charge),
+      chargesLength   : int }
 
   entrypoint init() =
     { payments = {},
-      paymentsLength = 0 }
+      paymentsLength = 0,
+      charges = {},
+      chargesLength = 0 }
 
   entrypoint get_payments_length() : int =
     state.paymentsLength
 
-  public stateful entrypoint make_payment(companyAddress' : address, clientAddress' : address, companyName' : string, clientName' : string, clientEmail' : string, payingFor' : string, amount' : int, paeyCharge' : int) =
-    let payment = { paeyAddress = ak_s3Qt2boW7eqP2o1maYoKXnbPovjjJGDcSYc4csyJqsZzVKc26, companyAddress = companyAddress', clientAddress = Call.caller, companyName = companyName', clientName = clientName', clientEmail = clientEmail', payingFor = payingFor', amount = amount', paeyCharge = paeyCharge'}
+  entrypoint get_charges_length() : int =
+    state.chargesLength
+
+  public stateful entrypoint make_payment(companyAddress' : address, clientAddress' : address, companyName' : string, clientName' : string, clientEmail' : string, payingFor' : string, amount' : int) =
+    let payment = { companyAddress = companyAddress', clientAddress = Call.caller, companyName = companyName', clientName = clientName', clientEmail = clientEmail', payingFor = payingFor', amount = amount' }
     let index = get_payments_length() + 1
-    Chain.spend(payment.companyAddress, payment.amount)
-    Chain.spend(payment.paeyAddress, payment.paeyCharge)
+    Chain.spend(payment.companyAddress, Call.value)
     put(state{ payments[index] = payment, paymentsLength = index })
+
+  public stateful entrypoint pay_charge(companyName' : string, clientName' : string, amountPaid' : int, paeyCharge' : int) =
+    let charge = { paeyAddress = ak_s3Qt2boW7eqP2o1maYoKXnbPovjjJGDcSYc4csyJqsZzVKc26, clientAddress = Call.caller, companyName = companyName', clientName = clientName', amountPaid = amountPaid', paeyCharge = paeyCharge' }
+    let chargeIndex = get_charges_length() + 1
+    Chain.spend(charge.paeyAddress, Call.value)
+    put(state{ charges[chargeIndex] = charge, chargesLength = chargeIndex})
   
   entrypoint get_payment(index : int) : payment =
   	switch(Map.lookup(index, state.payments))
 	    None    => abort("There was no payment with this index registered.")
 	    Some(x) => x
+
+  entrypoint get_charges(chargeIndex : int) : charge =
+    switch(Map.lookup(chargeIndex, state.charges))
+      None    => abort("There was no charge with this index registerd.")
+      Some(x) => x
