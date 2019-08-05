@@ -1,22 +1,31 @@
 <!DOCTYPE html>
 <html itemscope itemtype="https://schema.org/Organization">
   <head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-144562288-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'UA-144562288-1');
+    </script>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1, user-scalable=no">
     <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow" />
     <meta name="google" content="translate" />
 
-    <title>Pæy - Changing the Future of Transaction</title>
+    <title>Pæy--changing the future of transaction</title>
 
-    <meta name="title" content="Pæy - Changing the Future of Transaction">
+    <meta name="title" content="Pæy--changing the future of transaction">
     <meta name="keywords" content="emmanueljet, Emmanuel Joseph (Jet), Emmanuel Joseph, Payment Company, pay online, college, high school, university, secondary school, aeternity, nigeria, decentralized, blockchain, schools, students, fee, fees">
     <meta name="description" content="Pæy is a decentralized payment system that allows payment with crypto currencies">
 
     <!-- Google -->
     <meta name="google-site-verification" content="WDCPGkWtE_hAvENmQ6s3Y4AAZkWU90-I1-NbwZ6OmqU" />
     <link itemprop="url" rel="canonical" href="https://aepp-paey.web.app" />
-    <meta itemprop="name" content="Pæy - Changing the Future of Transaction">
+    <meta itemprop="name" content="Pæy--changing the future of transaction">
     <meta itemprop="description" content="Pæy is a decentralized payment system that allows payment with crypto currencies">
     <meta itemprop="image" content="https://aepp-paey.web.app/assets/images/logo.png">
 
@@ -24,7 +33,7 @@
     <meta property="fb:app_id" content="2662662980423546"/>
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://aepp-paey.web.app" />
-    <meta property="og:title" content="Pæy - Changing the Future of Transaction" />
+    <meta property="og:title" content="Pæy--changing the future of transaction" />
     <meta property="og:description" content="Pæy is a decentralized payment system that allows payment with crypto currencies" />
     <meta property="og:image" content="https://aepp-paey.web.app/assets/images/logo.png" />
     <meta property="og:image:type" content="image/png" />
@@ -35,7 +44,7 @@
     <meta property="twitter:url" content="https://aepp-paey.web.app">
     <meta name="twitter:site" content="@ae_paey">
     <meta name="twitter:creator" content="@emmanuelJet_">
-    <meta name="twitter:title" content="Pæy - Changing the Future of Transaction">
+    <meta name="twitter:title" content="Pæy--changing the future of transaction">
     <meta name="twitter:description" content="Pæy is a decentralized payment system that allows payment with crypto currencies">
     <meta name="twitter:image:src" content="https://aepp-paey.web.app/assets/images/logo.png">
     <meta name="twitter:image:alt" content="Pæy Image">
@@ -133,90 +142,108 @@
         <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.3s">   
           <div class="col-lg-12 col-md-12 col-sm-12">
             <div class="contact-block">
-              <form id="payForm">
+              <form id="paymentForm">
                 <div class="row">
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="companyName">Company Name</label>
-                      <input type="text" class="form-control" id="companyName" name="company" placeholder="Company Name" required data-error="Please enter Company Name">
-                      <div class="help-block with-errors"></div>
+                      <label for="inputCompanyName">Company</label>
+                      <div class="input-group">
+                        <select id="inputCompanyName" name="companyName" class="form-control" data-error="Please Select Company">
+                          <option selected>Select One</option>
+                          <option value="Company 1">Company 1</option>
+                          <option value="Company 2">Company 2</option>
+                        </select>
+                        <div class="help-block with-errors text-danger"></div>
+                        <input type="text" class="overflow-hidden" id="inputCompanyAddress" name="companyAddress" value="ak_s3Qt2boW7eqP2o1maYoKXnbPovjjJGDcSYc4csyJqsZzVKc26" disabled>
+                      </div>
                     </div>                                 
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="payerEmail">Email Address</label>
-                      <input type="email" class="form-control" id="payerEmail" name="email" placeholder="Email Address" required data-error="Please enter your Email Address">
-                      <div class="help-block with-errors"></div>
+                      <label for="inputClientEmail">Email Address</label>
+                      <input type="email" class="form-control" id="inputClientEmail" name="email" placeholder="Email Address" required data-error="Please enter your Email Address">
+                      <div class="help-block with-errors text-danger"></div>
                     </div> 
                   </div>
                     <div class="col-md-12">
                     <div class="form-group">
-                      <label for="payerName">Full Name</label>
-                      <input type="text" class="form-control" id="payerName" name="school" placeholder="Full Name" required data-error="Please select your name">
-                      <div class="help-block with-errors"></div>
+                      <label for="inputClientName">Full Name</label>
+                      <input type="text" class="form-control" id="inputClientName" name="school" placeholder="Full Name" required data-error="Please select your name">
+                      <div class="help-block with-errors text-danger"></div>
                     </div>
                   </div>
                   <div class="col-md-12">
                     <div class="form-group">
-                      <label for="payingFor">Pæying For?</label>
-                      <input type="text" class="form-control" id="payingFor" name="fee" placeholder="Fee For?" required data-error="Please enter fee type">
-                      <div class="help-block with-errors"></div>
+                      <label for="inputPayingFor">Pæying For</label>
+                      <input type="text" class="form-control" id="inputPayingFor" name="feeType" placeholder="Fee For?" required data-error="Please enter fee type">
+                      <div class="help-block with-errors text-danger"></div>
                     </div>
                   </div>
                   <div class="row col-md-12">
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="PAmount">Amount In AE</label>
-                        <input type="number" class="form-control" id="PAmount" name="amount" placeholder="Amount in AE" data-error="Please enter amount you want to pay in AE">
-                        <div class="help-block with-errors"></div>
+                        <label for="InputCryptoAmount">Amount In Crypto</label>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <select id="inputCryptoType" name="CCType" class="btn btn-common">
+                              <option value="AE" selected>AE</option>
+                            </select>
+                          </div>
+                          <input type="number" class="form-control" id="InputCryptoAmount" name="CAmount" placeholder="Amount in Crypro" data-error="Please enter amount you want to pay">
+                          <div class="help-block with-errors text-danger"></div>
+                        </div>
                       </div>
                     </div>
                     <div class="col-md-6">
                       <div class="form-group">
-                        <label for="NGAmount">Amount In Fiat</label>
+                        <label for="inputFiatAmount">Amount In Fiat <small class="text-danger">Work In Progress</small></label>
                         <div class="input-group">
                           <div class="input-group-prepend">
-                            <select name="currencytype" class="btn btn-primary">
+                            <select id="inputFiatType" name="FCtype" class="btn btn-common">
                               <option value="NGN" selected>NGN</option>
                               <option value="USD">USD</option>
                             </select>
                           </div>
-                          <input type="number" class="form-control" id="NGAmount" name="amount" placeholder="Amount in AE" data-error="Please enter amount you want to pay">
-                          <div class="help-block with-errors"></div>
+                          <input type="number" class="form-control" id="inputFiatAmount" name="FAmount" placeholder="Amount in Fiat" data-error="Please enter amount you want to pay">
+                          <div class="help-block with-errors text-danger"></div>
                         </div>
                       </div>
                     </div>
                   </div>
                   <div class="col-md-12">
-                    <div class="submit-button text-center">
-                      <button type="button" class="btn btn-common" data-toggle="modal" data-target="#confirmModal">Confirm Payment</button>
-                      <div id="submit" class="h3 text-center hidden"></div> 
+                    <div class="text-center">
+                      <button type="button" class="btn btn-common" id="confirmPaymentBtn">Confirm Payment</button>
+                      <div id="loading" class="text-center">
+                        <p>Paying...</p>
+                        <div class="spinner-border spinner-border-md"></div>
+                        <div class="spinner-grow spinner-grow-md"></div>
+                      </div>
+                      <div id="paymentSubmit" class="h3 text-center hidden"></div> 
                       <div class="clearfix"></div>
                     </div>
                   </div>
-                </div>    
-                <div class="modal fade" id="confirmModal">
-                  <div class="modal-dialog modal-dialog-centered">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <h4 class="modal-title">Confirm Payment</h4>
-                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div id="confirmation">
+                  <div id="pricing" class="col-12 active">
+                    <div class="table wow fadeInUp active" data-wow-delay="1.2s">
+                      <div class="title">
+                        <h4>Payment Confirmation</h4>
+                        <p style="margin-top: -10px"><small>Please Confirm The Following detail below to make payment</small></p>
                       </div>
-                      <div class="modal-body">
-                        Modal body..
-                      </div>
-                      <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                      <ul class="description">
+                        <li>Company Name: <span id="companyName"></span></li>
+                        <li>Email Address: <span id="clientEmail"></span></li>
+                        <li>Full Name: <span id="clientName"></span></li>
+                        <li>Paying For: <span id="payingFor"></span></li>
+                        <li>Amount In Crypto: <span id="cryptoAmount"></span></li>
+                        <li>Charges: <span id="paeyCharges"></span></li>
+                      </ul>
+                      <div class="submit-button">
                         <button class="btn btn-common" id="paymentsubmit" type="submit">Pay Now</button>
-                        <div id="loading" class="text-center">
-                          <p>Loading...</p>
-                          <div class="spinner-border spinner-border-md"></div>
-                          <div class="spinner-grow spinner-grow-md"></div>
-                        </div>
                       </div>
-                    </div>
-                  </div>
-                </div>        
+                    </div> 
+                  </div>  
+                </div>
               </form>
             </div>
           </div>
@@ -301,10 +328,18 @@
       <i class="lni-arrow-up"></i>
     </a>
 
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/6.3.3/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/6.3.3/firebase-firestore.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
+
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../assets/js/jquery-min.js"></script>
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
+    <script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
     <script src="../assets/js/owl.carousel.min.js"></script>
     <script src="../assets/js/wow.js"></script>
     <script src="../assets/js/jquery.nav.js"></script>
@@ -312,6 +347,6 @@
     <script src="../assets/js/jquery.easing.min.js"></script>  
     <script src="../assets/js/main.js"></script>
     <script src="../assets/js/form-validator.min.js"></script>
-    <script src="../assets/js/contact-form-script.min.js"></script>
+    <script src="assets/js/payment.js"></script>
   </body>
 </html>

@@ -298,6 +298,10 @@ a.back-to-top:hover, a.back-to-top:focus {
   color:  #f7296e
 }
 
+#confirmation {
+  display: none;
+}
+
 .loader {
   top: 50%;
   width: 50px;

@@ -36,7 +36,7 @@ contract PaeyPay =
   entrypoint get_charges_length() : int =
     state.chargesLength
 
-  public stateful entrypoint make_payment(companyAddress' : address, clientAddress' : address, companyName' : string, clientName' : string, clientEmail' : string, payingFor' : string, amount' : int) =
+  public stateful entrypoint make_payment(companyAddress' : address, companyName' : string, clientName' : string, clientEmail' : string, payingFor' : string, amount' : int) =
     let payment = { companyAddress = companyAddress', clientAddress = Call.caller, companyName = companyName', clientName = clientName', clientEmail = clientEmail', payingFor = payingFor', amount = amount' }
     let index = get_payments_length() + 1
     Chain.spend(payment.companyAddress, Call.value)
