@@ -60,14 +60,21 @@ const contractSource = `
       Some(x) => x
 `;
 
-const contractAddress = 'ct_2nYoPCx7CpiXytx2t8fQfgseiZmLRofPMjXRWW8dB17xwEuLtv';
+const contractAddress = 'ct_664M8eXuMPWW6PFHpQpXifW7QfQE6Dps3VvyQqLFcQKMD1uPB';
 var client = null;
-var contractInstance = null;
+
+//Create a asynchronous write call for our smart contract
+async function contractCall(func, args, value) {
+  const contract = await client.getContractInstance(contractSource, {contractAddress});
+  //Make a call to write smart contract func, with aeon value input
+  const calledSet = await contract.call(func, args, {amount: value}).catch(e => console.error(e));
+
+  return calledSet;
+}
 
 window.addEventListener('load', async() => {
-  $("#loader").show();
+  //Initialize the Aepp object through aepp-sdk.browser.js, the base app needs to be running.
   client = await Ae.Aepp();
-  contractInstance = await client.getContractInstance(contractSource, {contractAddress});
 });
 
 $('#confirmPaymentBtn').click(function(){
@@ -94,39 +101,30 @@ $("#paymentForm").validator().on("submit", function (event) {
     submitMSG(false, "Did you fill in the form properly?");
   } else {
     event.preventDefault();
-    $("#confirmation").hide();
-    $("#loading").show();
-    submitPayment();
-    $("#loading").hide();
   }
 });
 
-async function submitPayment(){
-  var companyName = $("#inputCompanyName").val();
-  var companyAddress = $("#inputCompanyAddress").val();
-  var clientEmail = $("#inputClientEmail").val();
-  var clientName = $("#inputClientName").val();
-  var payingFor = $("#inputPayingFor").val();
+$('#paymentsubmit').click(async function(){
+  $("#confirmation").hide();
+  $("#loading").show();
+
+  var companyName = ($("#inputCompanyName").val());
+  var companyAddress = ($("#inputCompanyAddress").val());
+  var clientEmail = ($("#inputClientEmail").val());
+  var clientName = ($("#inputClientName").val());
+  var payingFor = ($("#inputPayingFor").val());
   var cryptoType = $("#inputCryptoType").val();
-  var amount = $("#InputCryptoAmount").val();
+  var amount = ($("#InputCryptoAmount").val());
   var cryptoAmount = amount * 1000000000000000000;
   var chargesAmount = 0.1 * amount;
   var paeyCharges = 0.1 * cryptoAmount;
   var date = new Date();
   var db = firebase.firestore();
-  var docID = Math.random().toString(36).substring(7);
 
-  await contractInstance.methods.pay_charge(companyName, clientName, cryptoAmount, paeyCharges, { amount: paeyCharges }).catch(function(error) {
-    formError();
-    submitMSG(false,error);
-  }
-  );
-  await contractInstance.methods.make_payment(companyAddress, companyName, clientName, clientEmail, payingFor, cryptoAmount, { amount: cryptoAmount }).catch(function(error) {
-    formError();
-    submitMSG(false,error);
-  });
+  await contractCall('pay_charge', [companyName, clientName, cryptoAmount, paeyCharges], paeyCharges);
+  await contractCall('make_payment', [companyAddress, companyName, clientName, clientEmail, payingFor, cryptoAmount], cryptoAmount);
 
-  db.collection(companyName + ' Payment').doc(docID).set({
+  db.collection(companyName + ' Payment').add({
     companyName: companyName,
     companyAddress: companyAddress,
     clientEmail: clientEmail,
@@ -144,7 +142,44 @@ async function submitPayment(){
     formError();
     submitMSG(false,error);
   });
-}
+
+  $("#loading").hide();  
+});
+
+// function submitPayment(){
+//   var companyName = $("#inputCompanyName").val();
+//   var companyAddress = $("#inputCompanyAddress").val();
+//   var clientEmail = $("#inputClientEmail").val();
+//   var clientName = $("#inputClientName").val();
+//   var payingFor = $("#inputPayingFor").val();
+//   var cryptoType = $("#inputCryptoType").val();
+//   var amount = $("#InputCryptoAmount").val();
+//   var cryptoAmount = amount * 1000000000000000000;
+//   var chargesAmount = 0.1 * amount;
+//   var paeyCharges = 0.1 * cryptoAmount;
+//   var date = new Date();
+//   var db = firebase.firestore();
+//   var docID = Math.random().toString(36).substring(7);
+
+//   db.collection(companyName + ' Payment').doc(docID).set({
+//     companyName: companyName,
+//     companyAddress: companyAddress,
+//     clientEmail: clientEmail,
+//     clientName: clientName,
+//     payingFor: payingFor,
+//     cryptoType: cryptoType,
+//     cryptoAmount: amount + ' AE',
+//     paeyCharges: chargesAmount + ' AE',
+//     date: date,
+//   })
+//   .then(function() {
+//     formSuccess();
+//   })
+//   .catch(function(error) {
+//     formError();
+//     submitMSG(false,error);
+//   });
+// }
 
 function formSuccess(){
   $("#paymentForm")[0].reset();
