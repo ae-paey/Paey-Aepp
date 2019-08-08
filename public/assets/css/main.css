@@ -43,6 +43,14 @@ body {
 	background-color: #ffffff;
 }
 
+.mobile-only {
+  display:none !important;
+}
+
+.desktop-only {
+  display:inline-block !important;
+}
+
 h1, h2, h3, h4 {
   font-size: 38px;
   color: #222222;

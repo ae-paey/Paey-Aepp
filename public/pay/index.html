@@ -90,8 +90,13 @@
                   Home
                 </a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="index.html">
+              <li class="nav-item desktop-only">
+                  <a class="nav-link" href="index.html">
+                    Pay
+                  </a>
+                </li>
+              <li class="nav-item mobile-only">
+                <a class="nav-link" href="https://base.aepps.com/browser/aepp-paey.web.app/pay/index.html">
                   Pay
                 </a>
               </li>
@@ -115,7 +120,8 @@
                 <img src="../assets/images/banner-text.png" alt="Banner Text Logo" class="head-title">
                 <p>Pæy is a decentralized payment system that allows payment with crypto currencies</p>
                 <div class="header-button">
-                  <a href="index.html" class="btn btn-common">Pay</a>
+                  <a href="index.html" class="btn btn-common desktop-only">Pay</a>
+                  <a href="https://base.aepps.com/browser/aepp-paey.web.app/pay/index.html" class="btn btn-common mobile-only">Pay</a>
                   <a href="../trade/index.html" class="btn btn-border">Trade</a>
                 </div>
               </div>
@@ -147,15 +153,11 @@
                   <div class="col-md-12">
                     <div class="form-group">
                       <label for="inputCompanyName">Company</label>
-                      <div class="input-group">
-                        <select id="inputCompanyName" name="companyName" class="form-control" data-error="Please Select Company">
-                          <option selected>Select One</option>
-                          <option value="Company 1">Company 1</option>
-                          <option value="Company 2">Company 2</option>
-                        </select>
-                        <div class="help-block with-errors text-danger"></div>
-                        <input type="text" class="overflow-hidden" id="inputCompanyAddress" name="companyAddress" value="ak_s3Qt2boW7eqP2o1maYoKXnbPovjjJGDcSYc4csyJqsZzVKc26" disabled>
-                      </div>
+                      <select id="inputCompanyName" name="companyName" class="form-control" data-error="Please Select Company">
+                        <option selected>Select One</option>
+                        <option value="Pæy LLC">Pæy LLC</option>
+                        <option value="TechHub EKSU">TechHub EKSU</option>
+                      </select>
                     </div>                                 
                   </div>
                   <div class="col-md-12">
@@ -274,7 +276,8 @@
               <h3 class="footer-titel">Products</h3>
               <ul class="footer-link">
                 <li><a href="trade/index.html">Trade</a></li>
-                <li><a href="pay/index.html">Pay</a></li>
+                <li class="desktop-only"><a href="index.html">Pay</a></li>
+                <li class="mobile-only"><a href="https://base.aepps.com/browser/aepp-paey.web.app/pay/index.html">Pay</a></li>
                 <li><a href="http://paey.herokuapp.com" target="_blank">Company</a></li>       
               </ul>
             </div>
@@ -327,12 +330,22 @@
       <i class="lni-arrow-up"></i>
     </a>
 
-    <!-- update the version number as needed -->
-    <script defer src="/__/firebase/6.3.3/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="/__/firebase/6.3.3/firebase-firestore.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="/__/firebase/init.js"></script>
+    <!-- Firebase Scripts -->
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/6.3.3/firebase-firestore.js"></script>
+    <script>
+      const firebaseConfig = {
+        apiKey: "AIzaSyAxMKNowWXNBVS_pRI5NkNg4sppVAMCLAo",
+        authDomain: "aepp-paey.firebaseapp.com",
+        databaseURL: "https://aepp-paey.firebaseio.com",
+        projectId: "aepp-paey",
+        storageBucket: "aepp-paey.appspot.com",
+        messagingSenderId: "653985433284",
+        appId: "1:653985433284:web:98dba8dcd23dfe10"
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+    </script>
 
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../assets/js/jquery-min.js"></script>
