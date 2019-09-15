@@ -91,10 +91,10 @@
                 </a>
               </li>
               <li class="nav-item desktop-only">
-                  <a class="nav-link" href="index.html">
-                    Pay
-                  </a>
-                </li>
+                <a class="nav-link" href="index.html">
+                  Pay
+                </a>
+              </li>
               <li class="nav-item mobile-only">
                 <a class="nav-link" href="https://base.aepps.com/browser/aepp-paey.web.app/pay/index.html">
                   Pay
@@ -106,18 +106,23 @@
                 </a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Transactions</a>
-                <div class="dropdown-menu">
-                  <a class="dropdown-item" href="trans.html">Pay</a>
-                  <a class="dropdown-item" href="../trade/trans.html">Trade</a>
-                </div>
-              </li>
+                  <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#">Transactions</a>
+                  <div class="dropdown-menu">
+                    <a class="dropdown-item" href="trans.html">Pay</a>
+                    <a class="dropdown-item" href="../trade/trans.html">Trade</a>
+                  </div>
+                </li>
             </ul>
           </div>
         </div>
       </nav>
       <!-- Navbar End -->
-
+      <div id="loading-message">
+        <div id="loading" class="alert alert-secondary text-center">
+          <img src="../assets/img/loader.svg">
+          <div><b>Loading....</b></div>
+        </div>
+      </div>
       <!-- Hero Area Start -->
       <div id="hero-area" class="hero-area-bg">
         <div class="container">      
@@ -127,9 +132,9 @@
                 <img src="../assets/images/banner-text.png" alt="Banner Text Logo" class="head-title">
                 <p>Pæy is a decentralized payment system that allows payment with crypto currencies</p>
                 <div class="header-button">
-                  <a href="index.html" class="btn btn-common desktop-only">Pay</a>
+                  <a href="../pay/index.html" class="btn btn-common desktop-only">Pay</a>
                   <a href="https://base.aepps.com/browser/aepp-paey.web.app/pay/index.html" class="btn btn-common mobile-only">Pay</a>
-                  <a href="../trade/index.html" class="btn btn-border">Trade</a>
+                  <a href="index.html" class="btn btn-border">Trade</a>
                 </div>
               </div>
             </div>
@@ -144,116 +149,38 @@
       <!-- Hero Area End -->
     </header>
     <!-- Header Area wrapper End -->
-
     <!-- Pæy Section start -->
-    <section id="pay" class="section-padding bg-gray">    
+    <section id="trade" class="section-padding bg-gray">    
       <div class="container">
         <div class="section-header text-center">          
-          <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Pay Now</h2>
+          <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Pay Transactions</h2>
           <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
         </div>
-        <div class="row contact-form-area wow fadeInUp" data-wow-delay="0.3s">   
-          <div class="col-lg-12 col-md-12 col-sm-12">
-            <div class="contact-block">
-              <form id="paymentForm">
-                <div class="row">
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="inputCompanyName">Company</label>
-                      <select id="inputCompanyName" name="companyName" class="form-control" data-error="Please Select Company">
-                        <option selected>Select One</option>
-                        <option value="Pæy LLC">Pæy LLC</option>
-                        <option value="TechHub EKSU">TechHub EKSU</option>
-                      </select>
-                    </div>                                 
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="inputClientEmail">Email Address</label>
-                      <input type="email" class="form-control" id="inputClientEmail" name="email" placeholder="Email Address" required data-error="Please enter your Email Address">
-                      <div class="help-block with-errors text-danger"></div>
-                    </div> 
-                  </div>
-                    <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="inputClientName">Full Name</label>
-                      <input type="text" class="form-control" id="inputClientName" name="school" placeholder="Full Name" required data-error="Please select your name">
-                      <div class="help-block with-errors text-danger"></div>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="form-group">
-                      <label for="inputPayingFor">Pæying For</label>
-                      <input type="text" class="form-control" id="inputPayingFor" name="feeType" placeholder="Fee For?" required data-error="Please enter fee type">
-                      <div class="help-block with-errors text-danger"></div>
-                    </div>
-                  </div>
-                  <div class="row col-md-12">
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="InputCryptoAmount">Amount In Crypto</label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <select id="inputCryptoType" name="CCType" class="btn btn-common">
-                              <option value="AE" selected>AE</option>
-                            </select>
-                          </div>
-                          <input type="number" class="form-control" id="InputCryptoAmount" name="CAmount" placeholder="Amount in Crypro" data-error="Please enter amount you want to pay">
-                          <div class="help-block with-errors text-danger"></div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="col-md-6">
-                      <div class="form-group">
-                        <label for="inputFiatAmount">Amount In Fiat <small class="text-danger">Work In Progress</small></label>
-                        <div class="input-group">
-                          <div class="input-group-prepend">
-                            <select id="inputFiatType" name="FCtype" class="btn btn-common">
-                              <option value="NGN" selected>NGN</option>
-                              <option value="USD">USD</option>
-                            </select>
-                          </div>
-                          <input type="number" class="form-control" id="inputFiatAmount" name="FAmount" placeholder="Amount in Fiat" data-error="Please enter amount you want to pay">
-                          <div class="help-block with-errors text-danger"></div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="col-md-12">
-                    <div class="text-center">
-                      <button type="button" class="btn btn-common" id="confirmPaymentBtn">Confirm Payment</button>
-                      <div id="loading" class="text-center">
-                        <img src="../assets/img/loader.svg">
-                        <p>Paying...</p>
-                      </div>
-                      <div id="paymentSubmit" class="h3 text-center hidden"></div> 
-                      <div class="clearfix"></div>
-                    </div>
-                  </div>
-                </div>
-                <div id="confirmation">
-                  <div id="pricing" class="col-12 active">
-                    <div class="table wow fadeInUp active" data-wow-delay="1.2s">
-                      <div class="title">
-                        <h4>Payment Confirmation</h4>
-                        <p style="margin-top: -10px"><small>Please Confirm The Following detail below to make payment</small></p>
-                      </div>
-                      <ul class="description">
-                        <li>Company Name: <span id="companyName"></span></li>
-                        <li>Email Address: <span id="clientEmail"></span></li>
-                        <li>Full Name: <span id="clientName"></span></li>
-                        <li>Paying For: <span id="payingFor"></span></li>
-                        <li>Amount In Crypto: <span id="cryptoAmount"></span></li>
-                        <li>Charges: <span id="paeyCharges"></span></li>
-                      </ul>
-                      <div class="submit-button">
-                        <button class="btn btn-common" id="paymentsubmit" type="submit">Pay Now</button>
-                      </div>
-                    </div> 
-                  </div>  
-                </div>
-              </form>
-            </div>
+        <div class="text-center wow fadeInDown justify-content-center" data-wow-delay="0.3s">
+          <div class="table-responsive mx-auto shadow-lg m-4">
+            <table class="table table-bordered table-sm">
+              <thead class="thead-light">
+                <tr>
+                  <th>Company Name</th>
+                  <th>Client Name</th>
+                  <th>Paid For</th>
+                  <th>Amount</th>
+                </tr>
+              </thead>
+              <div id="paymentBody"></div>
+              <script id="paymentTemplate" type="x-tmpl-mustache">
+                {{#paymentArray}}
+                  <tbody>
+                    <tr>
+                      <td>{{ companyName }}</td>
+                      <td>{{ clientName }}</td>
+                      <td>{{ paidFor }}</td>
+                      <td>{{ amount }}</td>
+                    </tr>
+                  </tbody>
+                {{/paymentArray}}
+              </script>
+            </table>
           </div>
         </div>
       </div> 
@@ -282,8 +209,8 @@
             <div class="col-lg-3 col-md-6 col-sm-12 col-xs-12">
               <h3 class="footer-titel">Products</h3>
               <ul class="footer-link">
-                <li><a href="trade/index.html">Trade</a></li>
-                <li class="desktop-only"><a href="index.html">Pay</a></li>
+                <li><a href="index.html">Trade</a></li>
+                <li class="desktop-only"><a href="../pay/index.html">Pay</a></li>
                 <li class="mobile-only"><a href="https://base.aepps.com/browser/aepp-paey.web.app/pay/index.html">Pay</a></li>
                 <li><a href="http://paey.herokuapp.com" target="_blank">Company</a></li>       
               </ul>
@@ -337,26 +264,18 @@
       <i class="lni-arrow-up"></i>
     </a>
 
-    <!-- update the version number as needed -->
-    <script defer src="../__/firebase/6.5.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="../__/firebase/6.5.0/firebase-auth.js"></script>
-    <script defer src="../__/firebase/6.5.0/firebase-firestore.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="../__/firebase/init.js"></script>
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../assets/js/jquery-min.js"></script>
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
     <script src="../assets/js/owl.carousel.min.js"></script>
     <script src="../assets/js/wow.js"></script>
     <script src="../assets/js/jquery.nav.js"></script>
     <script src="../assets/js/scrolling-nav.js"></script>
     <script src="../assets/js/jquery.easing.min.js"></script>  
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/form-validator.min.js"></script>
-    <script src="js/payment.js"></script>
+    <script src="js/trans.js"></script>
   </body>
 </html>

@@ -21,26 +21,60 @@ body {
   overflow-x: hidden;
 }
 
-.scrollbar {
-	background: #ffffff;
-	overflow-y: auto;
+::-webkit-scrollbar {
+  -webkit-border-radius: 100px;
+  background-color: rgba(0,0,0,0);
+  width: 9px;
 }
-
-.scrollbar-primary::-webkit-scrollbar {
-	width: 12px;
-	background-color: #ffffff;
+::-webkit-scrollbar {
+  height: 16px;
+  overflow: visible;
 }
-
-.scrollbar-primary::-webkit-scrollbar-thumb {
-	border-radius: 10px;
-	box-shadow: inset 0 0 6px #f729af;
-	background-color: #f7296e;
+::-webkit-scrollbar-button {
+  height: 0;
+  width: 0;
 }
-
-.scrollbar-primary::-webkit-scrollbar-track {
-	box-shadow: inset 0 0 6px #b8b5b5;
-	border-radius: 10px;
-	background-color: #ffffff;
+body::-webkit-scrollbar-corner {
+  background-clip: padding-box;
+  background-color: #f5f5f5;
+  border: solid #fff;
+  border-width: 3px 0 0 3px;
+  -webkit-box-shadow: inset 1px 1px 0 #f7296e;
+  box-shadow: inset 1px 1px 0 #f7296e;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+body::-webkit-scrollbar-thumb {
+  border-width: 1px 1px 1px 5px;
+}
+::-webkit-scrollbar-thumb {
+  border: 1px solid rgba(255,255,255,0.4);
+}
+::-webkit-scrollbar-thumb {
+  -webkit-border-radius: 100px;
+  background: #f7296e;
+}
+::-webkit-scrollbar-thumb {
+  border: solid transparent;
+  border-width: 1px 1px 1px 6px;
+  min-height: 28px;
+  padding: 100px 0 0;
+  -webkit-box-shadow: inset 1px 1px 0 #f7296e, inset 0 -1px 0 rgba(0,0,0,.07);
+  box-shadow: inset 1px 1px 0 #f7296e, inset 0 -1px 0 rgba(0,0,0,.07);
+}
+::-webkit-scrollbar-track {
+  background-clip: padding-box;
+  border: solid transparent;
+  border-width: 0 0 0 4px;
+}
+body::-webkit-scrollbar-track-piece {
+  background-clip: padding-box;
+  background-color: #f5f5f5;
+  border: solid #fff;
+  border-width: 0 0 0 3px;
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.14), inset -1px 0 0 rgba(0,0,0,.07);
+  box-shadow: inset 1px 0 0 rgba(0,0,0,.14), inset -1px 0 0 rgba(0,0,0,.07);
 }
 
 .mobile-only {
@@ -67,6 +101,7 @@ a {
 
 a:hover {
   text-decoration: none;
+  color: #f7296e;
 }
 
 a a:focus {
@@ -301,12 +336,28 @@ a.back-to-top:hover, a.back-to-top:focus {
   z-index: 9999999;
 }
 
+#loading-message {
+  position: fixed;
+  top: 40%;
+  left: 0;
+  width:100%;
+  z-index: 9;
+}
+
 #loading {
   display: none;
   color:  #f7296e
 }
 
 #confirmation {
+  display: none;
+}
+
+#buy-confirmation {
+  display: none;
+}
+
+#sell-confirmation {
   display: none;
 }
 

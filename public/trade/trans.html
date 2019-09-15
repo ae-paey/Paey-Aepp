@@ -117,7 +117,12 @@
         </div>
       </nav>
       <!-- Navbar End -->
-
+      <div id="loading-message">
+        <div id="loading" class="alert alert-secondary text-center">
+          <img src="../assets/img/loader.svg">
+          <div><b>Loading....</b></div>
+        </div>
+      </div>
       <!-- Hero Area Start -->
       <div id="hero-area" class="hero-area-bg">
         <div class="container">      
@@ -144,12 +149,11 @@
       <!-- Hero Area End -->
     </header>
     <!-- Header Area wrapper End -->
-
     <!-- Pæy Section start -->
     <section id="trade" class="section-padding bg-gray">    
       <div class="container">
         <div class="section-header text-center">          
-          <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Trade</h2>
+          <h2 class="section-title wow fadeInDown" data-wow-delay="0.3s">Trade Transaction</h2>
           <div class="shape wow fadeInDown" data-wow-delay="0.3s"></div>
         </div>
         <div class="text-center wow fadeInDown justify-content-center" data-wow-delay="0.3s">
@@ -165,184 +169,76 @@
           <div class="tab-content mt-auto wow fadeInDown" data-wow-delay="0.3s">
             <div id="buy" class="container tab-pane active"><br>
               <h3>Buy</h3>
-              <p>Buy ætokens from us</p>
-              <div class="table-responsive mx-auto w-50">
+              <p>List of Buy Transaction</p>
+              <div class="table-responsive mx-auto shadow-lg m-4">
                 <table class="table table-bordered table-sm">
                   <thead class="thead-light">
                     <tr>
-                      <th><p><script>document.write(new Date().getDate());</script>/<script>document.write(new Date().getMonth() + 1);</script>/<script>document.write(new Date().getFullYear());</script></p></th>
-                      <th>NGN</th>
-                      <th>USD</th>
+                      <th>Trans Refrence</th>
+                      <th>Rate</th>
+                      <th>Fiat Sent</th>
+                      <th>æ Equivalent</th>
+                      <th>Completed</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>Rate/æ</td>
-                      <td>₦<span id="NGNBuyRate"></span></td>
-                      <td>$<span id="USDBuyRate"></span></td>
-                    </tr>
-                  </tbody>
+                  <div id="buyBody"></div>
+                  <script id="buyTemplate" type="x-tmpl-mustache">
+                    {{#buyArray}}
+                      <tbody>
+                        <tr>
+                          <td>{{ buyTrans }}</td>
+                          <td>{{ buyRate }}</td>
+                          <td>{{ buyFiat }}</td>
+                          <td>{{ buyAe }}</td>
+                          <td>
+                            if({{ buyCompleted }} === 'false') {
+                              <span class="text-warning">Processing...</span>
+                            } else {
+                              <span class="text-success">Completed</span>
+                            }
+                          </td>
+                        </tr>
+                      </tbody>
+                    {{/buyArray}}
+                  </script>
                 </table>
-              </div>
-              <div class="row contact-form-area text-left shadow-lg m-3 p-4 wow fadeInUp" data-wow-delay="0.3s">   
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="contact-block">
-                    <form id="buyForm">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <label for="inputBuyFiatType">Fiat Type</label>
-                          <select id="inputBuyFiatType" class="form-control" name="fiatType">
-                            <option value="NGN" selected>Naira (₦)</option>
-                            <option value="USD">Dollar ($)</option>
-                          </select>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="inputBuyerEmail">Email Address</label>
-                            <input type="email" class="form-control" id="inputBuyerEmail" name="fiatAmount" placeholder="Email Address" data-error="Please enter your email address" required>
-                            <div class="help-block with-errors text-danger"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="inputBuyFiatAmount">Fiat Amount</label>
-                            <input type="number" class="form-control" id="inputBuyFiatAmount" name="fiatAmount" placeholder="Fiat Amount" data-error="Please enter amount you want to buy" required>
-                            <div class="help-block with-errors text-danger"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-12 mx-auto">
-                          <div class="text-center">
-                            <button type="button" class="btn btn-common" id="confirmBuyBtn">Confirm</button>
-                            <div id="loading" class="text-center">
-                                <img src="../assets/img/loader.svg">
-                              <p>Loading...</p>
-                            </div>
-                            <div id="buySubmit" class="h3 text-center hidden"></div> 
-                            <div class="clearfix"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="buy-confirmation">
-                        <div id="pricing" class="active">
-                          <div class="table wow fadeInUp active" data-wow-delay="1.2s">
-                            <div class="title">
-                              <h4>Confirm</h4>
-                              <p style="margin-top: -10px"><small>Please confirm the following detail below to buy æ tokens</small></p>
-                            </div>
-                            <ul class="description">
-                              <li>Fiat Type: <span id="buyFiatType"></span></li>
-                              <li>Email Address: <span id="buyBuyerEmail"></span></li>
-                              <li>Fiat Amount: <span id="buyFiatAmount"></span></li>
-                              <li>aeEquivalent: <span id="buyAeEquivalent"></span></li>
-                            </ul>
-                            <div class="submit-button">
-                              <button class="btn btn-common" type="submit">Submit</button>
-                            </div>
-                          </div> 
-                        </div>  
-                      </div>
-                    </form>
-                  </div>
-                </div>
               </div>
             </div>
             <div id="sell" class="container tab-pane fade"><br>
               <h3>Sell</h3>
-              <p>Sell ætokens to us</p>
-              <div class="table-responsive mx-auto w-50">
+              <p>List of Sell Transaction</p>
+              <div class="table-responsive mx-auto shadow-lg m-4">
                 <table class="table table-bordered table-sm">
                   <thead class="thead-light">
                     <tr>
-                      <th><p><script>document.write(new Date().getDate());</script>/<script>document.write(new Date().getMonth() + 1);</script>/<script>document.write(new Date().getFullYear());</script></p></th>
-                      <th>NGN</th>
-                      <th>USD</th>
+                      <th>Trans Refrence</th>
+                      <th>Rate</th>
+                      <th>æ Sent</th>
+                      <th>Fiat Equivalent</th>
+                      <th>Completed</th>
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr>
-                      <td>Rate/æ</td>
-                      <td>₦<span id="NGNSellRate"></span></td>
-                      <td>$<span id="USDSellRate"></span></td>
-                    </tr>
-                  </tbody>
+                  <div id="sellBody"></div>
+                  <script id="sellTemplate" type="x-tmpl-mustache">
+                    {{#sellArray}}
+                      <tbody>
+                        <tr>
+                          <td>{{ sellTrans }}</td>
+                          <td>{{ sellRate }}</td>
+                          <td>{{ sellAe }}</td>
+                          <td>{{ sellFiat }}</td>
+                          <td>
+                            if({{ sellCompleted }} === 'false') {
+                              <span class="text-warning">Processing...</span>
+                            } else {
+                              <span class="text-success">Completed</span>
+                            }
+                          </td>
+                        </tr>
+                      </tbody>
+                    {{/sellArray}}
+                  </script>
                 </table>
-              </div>
-              <div class="row contact-form-area text-left shadow-lg m-3 p-4 wow fadeInUp" data-wow-delay="0.3s">   
-                <div class="col-lg-12 col-md-12 col-sm-12">
-                  <div class="contact-block">
-                    <form id="sellForm">
-                      <div class="row">
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="inputSellAeAmount">Ae Amount</label>
-                            <input type="number" class="form-control" id="inputSellAeAmount" name="aeAmount" placeholder="Ae Amount" data-error="Please enter amount you want to sell" required>
-                            <div class="help-block with-errors text-danger"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <label for="inputSellFiatType">Fiat Type <small class="text-danger">Fiat To Receive</small></label>
-                          <select id="inputSellFiatType" class="form-control" name="fiatType">
-                            <option value="NGN" selected>Naira (₦)</option>
-                            <option value="USD">Dollar ($)</option>
-                          </select>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="inputBankName">Bank Name</label>
-                            <input type="text" class="form-control" id="inputBankName" name="bankname" placeholder="Bank Name" data-error="Please enter bank name" required>
-                            <div class="help-block with-errors text-danger"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="inputAccountNumber">Account Number</label>
-                            <input type="number" class="form-control" id="inputAccountNumber" name="accountnumber" placeholder="Account Number" data-error="Please enter account number" required>
-                            <div class="help-block with-errors text-danger"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-12">
-                          <div class="form-group">
-                            <label for="inputAccountName">Account Name</label>
-                            <input type="name" class="form-control" id="inputAccountName" name="accountname" placeholder="Account Name" data-error="Please enter account name" required>
-                            <div class="help-block with-errors text-danger"></div>
-                          </div>
-                        </div>
-                        <div class="col-md-12 mx-auto">
-                          <div class="text-center">
-                            <button type="button" class="btn btn-common" id="confirmSellBtn">Confirm</button>
-                            <div id="loading" class="text-center">
-                              <img src="../assets/img/loader.svg">
-                              <p>Loading...</p>
-                            </div>
-                            <div id="sellSubmit" class="h3 text-center hidden"></div> 
-                            <div class="clearfix"></div>
-                          </div>
-                        </div>
-                      </div>
-                      <div id="sell-confirmation">
-                        <div id="pricing" class="active">
-                          <div class="table wow fadeInUp active" data-wow-delay="1.2s">
-                            <div class="title">
-                              <h4>Confirm</h4>
-                              <p style="margin-top: -10px"><small>Please confirm the following detail below</small></p>
-                            </div>
-                            <ul class="description">
-                              <li>Ae Amount: <span id="sellAeAmount"></span></li>
-                              <li>Fiat Type: <span id="sellFiatType"></span></li>
-                              <li>Fiat Equivalent: <span id="sellFiatEquivalent"></span></li>
-                              <li>Bank Name: <span id="bankName"></span></li>
-                              <li>Account Number: <span id="accountNumber"></span></li>
-                              <li>Account Name: <span id="accountName"></span></li>
-                            </ul>
-                            <div class="submit-button">
-                              <button class="btn btn-common" type="submit">Submit</button>
-                            </div>
-                          </div> 
-                        </div>  
-                      </div>
-                    </form>
-                  </div>
-                </div>
               </div>
             </div>
           </div>
@@ -428,27 +324,18 @@
       <i class="lni-arrow-up"></i>
     </a>
 
-    <!-- update the version number as needed -->
-    <script defer src="../__/firebase/6.5.0/firebase-app.js"></script>
-    <!-- include only the Firebase features as you need -->
-    <script defer src="../__/firebase/6.5.0/firebase-auth.js"></script>
-    <script defer src="../__/firebase/6.5.0/firebase-firestore.js"></script>
-    <!-- initialize the SDK after all desired features are loaded -->
-    <script defer src="../__/firebase/init.js"></script>
-
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="../assets/js/jquery-min.js"></script>
     <script src="../assets/js/popper.min.js"></script>
     <script src="../assets/js/bootstrap.min.js"></script>
     <script src="https://unpkg.com/@aeternity/aepp-sdk/dist/aepp-sdk.browser-script.js"></script>
-    <script src="https://js.paystack.co/v1/inline.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/3.0.1/mustache.js"></script>
     <script src="../assets/js/owl.carousel.min.js"></script>
     <script src="../assets/js/wow.js"></script>
     <script src="../assets/js/jquery.nav.js"></script>
     <script src="../assets/js/scrolling-nav.js"></script>
     <script src="../assets/js/jquery.easing.min.js"></script>  
     <script src="../assets/js/main.js"></script>
-    <script src="../assets/js/form-validator.min.js"></script>
-    <script src="js/trade.js"></script>
+    <script src="js/trans.js"></script>
   </body>
 </html>
