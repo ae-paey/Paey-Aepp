@@ -168,7 +168,7 @@ window.addEventListener('load', async () => {
       buyRate: buy.rate,
       buyFiat: buy.fiatSent,
       buyAe: buy.aeEquivalent,
-      buyCompleted: buy.completed,
+      buyCompleted: Boolean(buy.completed),
     })
   }
   for (let i = 1; i <= sellsLength; i++) {
@@ -179,7 +179,7 @@ window.addEventListener('load', async () => {
       sellRate: sell.rate,
       sellFiat: sell.aeSent,
       sellAe: sell.fiatEquivalent,
-      sellCompleted: sell.completed,
+      sellCompleted: Boolean(sell.completed),
     })
   }
 

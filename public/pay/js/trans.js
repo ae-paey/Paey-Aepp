@@ -157,7 +157,7 @@ window.addEventListener('load', async () => {
       companyName: payment.companyName,
       clientName: payment.clientName,
       paidFor: payment.payingFor,
-      amount: payment.amount + 'æ',
+      amount: payment.amount / 1000000000000000000 + 'æ',
     })
   }
 

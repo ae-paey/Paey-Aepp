@@ -21,7 +21,7 @@ Here is a list of features that it has:
 - Secured payment: It is a guarantee that all transactions will be safe and well secured
 - No hidden charges: Apart from our 1% commission, there are no hidden charges
 - Efficiency: Receive payment in less than twenty four hours
-- Working Contact Form: You are our number one priority
+- Trade: Exchanging ætokens with fiat currencies
 
 ## Screenshot
 
@@ -32,7 +32,7 @@ Here is a list of features that it has:
   <img src="https://i.ibb.co/WHK6qP3/5.png">
 </p>
 <p align="center">
-  <img src="https://i.ibb.co/cFNbrHt/4.png">
+  <img src="https://i.ibb.co/tX61Q9G/Screenshot-from-2019-09-17-00-17-18.png">
 </p>
 
 ## LICENSE

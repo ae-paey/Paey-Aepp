@@ -183,9 +183,9 @@
                           <td>{{ buyTrans }}</td>
                           <td>{{ buyRate }}</td>
                           <td>{{ buyFiat }}</td>
-                          <td>{{ buyAe }}</td>
+                          <td>{{ buyAe }}æ</td>
                           <td>
-                            if({{ buyCompleted }} === 'false') {
+                            if(!{{ buyCompleted }}) {
                               <span class="text-warning">Processing...</span>
                             } else {
                               <span class="text-success">Completed</span>
@@ -219,10 +219,10 @@
                         <tr>
                           <td>{{ sellTrans }}</td>
                           <td>{{ sellRate }}</td>
-                          <td>{{ sellAe }}</td>
+                          <td>{{ sellAe }}æ</td>
                           <td>{{ sellFiat }}</td>
                           <td>
-                            if({{ sellCompleted }} === 'false') {
+                            if(!{{ sellCompleted }}) {
                               <span class="text-warning">Processing...</span>
                             } else {
                               <span class="text-success">Completed</span>
